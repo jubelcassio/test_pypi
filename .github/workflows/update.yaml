@@ -21,7 +21,7 @@ jobs:
           git config --local user.name "$(git log --format='%an' HEAD^!)"
           git commit -m "auto docs" -a
       - name: Push
-          uses: ad-m/github-push-action@master
-          with:
-            github_token: ${{secrets.GITHUB_TOKEN}}
-            branch: ${{github.ref}}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          branch: ${{github.ref}}
