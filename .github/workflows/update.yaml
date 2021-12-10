@@ -24,8 +24,4 @@ jobs:
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
           git commit -am "auto docs"
-      - name: Push
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          branch: ${{github.ref}}
+          if [[ `git status --porcelain` ]]; then git commit -am "Formatting Code" && git push; fi;
