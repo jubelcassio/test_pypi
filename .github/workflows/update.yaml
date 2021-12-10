@@ -15,13 +15,15 @@ jobs:
           fetch-depth: 0
       # Updates documentation and code formatting
       - name: Update
-        run: echo "`date`" >> time.txt
+        run: |
+          echo "`date`" >> time.txt
+          cat time.txt
       # Commit changes
       - name: Commit files
         run: |
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git commit -m "auto docs" -a
+          git commit -am "auto docs"
       - name: Push
         uses: ad-m/github-push-action@master
         with:
