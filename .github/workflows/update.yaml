@@ -1,0 +1,27 @@
+name: Update a file
+
+on:
+  push:
+    branches: "master"
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Update
+        run: echo "`date`" > time.txt
+      - name: Commit files
+        run: |
+          git config --local user.email "$(git log --format='%ae' HEAD^!)"
+          git config --local user.name "$(git log --format='%an' HEAD^!)"
+          git commit -m "auto docs" -a
+      - name: Push
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{secrets.GITHUB_TOKEN}}
+            branch: ${{github.ref}}
