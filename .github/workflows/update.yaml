@@ -1,9 +1,9 @@
-name: Update a file
+name: Update docs
 
 on:
   pull_request:
     branches: "main"
-    types: [closed]
+    # types: [opened, ready_for_review, review_requested, assigned]
 
 jobs:
   build:
@@ -15,28 +15,13 @@ jobs:
           fetch-depth: 0
       # Updates documentation and code formatting
       - name: Update
-        run: echo "`date`" >> time.txt
+        run: |
+          echo "`date`" >> time.txt
+          cat time.txt
       # Commit changes
       - name: Commit files
         run: |
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git commit -m "auto docs" -a
-      - name: Push
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          branch: ${{github.ref}}
-      # Publishes to Pypi
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build
-      - name: Build package
-        run: python -m build
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          git commit -am "auto docs"
+          if [[ `git status --porcelain` ]]; then git commit -am "Formatting Code" && git push; fi;
