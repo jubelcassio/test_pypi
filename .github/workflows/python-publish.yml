@@ -1,8 +1,8 @@
-name: Release code
+name: Release code to Test Pypi
 
 on:
   push:
-    branches: "main"
+    branches: "release"
 
 jobs:
   build:

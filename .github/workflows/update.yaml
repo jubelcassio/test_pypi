@@ -1,8 +1,8 @@
-name: Update a file
+name: Update documentation
 
 on:
-  pull_request:
-    branches: "main"
+  push:
+    branches: "staging"
 
 jobs:
   build:
