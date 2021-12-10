@@ -1,9 +1,9 @@
-name: Update docs
+name: Update a file
 
 on:
   pull_request:
     branches: "main"
-    # types: [opened, ready_for_review, review_requested, assigned]
+    types: [closed]
 
 jobs:
   build:
@@ -15,13 +15,15 @@ jobs:
           fetch-depth: 0
       # Updates documentation and code formatting
       - name: Update
-        run: |
-          echo "`date`" >> time.txt
-          cat time.txt
+        run: echo "`date`" >> time.txt
       # Commit changes
       - name: Commit files
         run: |
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git commit -am "auto docs"
-          if [[ `git status --porcelain` ]]; then git commit -am "Formatting Code" && git push; fi;
+          git commit -m "auto docs" -a
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          branch: ${{github.ref}}
