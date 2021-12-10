@@ -2,7 +2,7 @@ name: Update a file
 
 on:
   push:
-    branches: "master"
+    branches: "main"
     types: [closed]
 
 jobs:
