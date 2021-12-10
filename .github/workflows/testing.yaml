@@ -1,0 +1,17 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches: "staging"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      # Running tests
+      - name: Update
+        run: echo "Running tests"
