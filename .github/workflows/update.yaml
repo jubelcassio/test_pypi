@@ -2,7 +2,7 @@ name: Update documentation
 
 on:
   push:
-    branches: "staging"
+    branches: "main"
 
 jobs:
   build:
