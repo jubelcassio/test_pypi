@@ -1,7 +1,10 @@
-name: Update documentation
+name: update_docs
 
 on:
   push:
+    branches: "main"
+
+  pull_request:
     branches: "main"
 
 jobs:
@@ -16,11 +19,11 @@ jobs:
       - name: Update
         run: echo "`date`" >> time.txt
       # Commit changes
-      - name: Commit files
+      - name: Commit changes
         run: |
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
-          git commit -m "auto docs" -a
+          git commit -m "Updating documentation" -a
       - name: Push
         uses: ad-m/github-push-action@master
         with:
