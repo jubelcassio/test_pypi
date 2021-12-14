@@ -3,7 +3,7 @@ name: Release code to Test Pypi
 on:
   workflow_run:
     workflows: "update_docs"
-    branches: "release"
+    branches: "main"
     types:
       - completed
 
