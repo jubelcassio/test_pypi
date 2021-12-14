@@ -19,8 +19,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: files
+      - name: pyproject
+        run: cat time.txt
+      - name: pyproject
         run: cat pyproject.toml
+      - name: list files
+        run: echo "`ls`"
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
