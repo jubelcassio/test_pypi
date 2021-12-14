@@ -19,8 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: List files
-        run: echo "$(ls .)"
+      - name: files
+        run: cat pyproject.toml
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
