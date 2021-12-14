@@ -1,9 +1,6 @@
 name: Release code to Test Pypi
 
 on:
-  push:
-    branches: "main"
-
   workflow_run:
     workflows: "update_docs"
     branches: "main"
@@ -23,16 +20,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: list files
-        run: echo "`ls`"
-      - name: pyproject
-        run: cat time.txt
-      - name: pyproject
-        run: cat pyproject.toml
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
